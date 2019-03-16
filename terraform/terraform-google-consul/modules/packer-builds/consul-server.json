@@ -1,0 +1,36 @@
+{
+  "min_packer_version": "1.0.4",
+  "variables": {
+    "project_id": "stoffee-hashi-googs",
+    "zone": "us-west1-b",
+    "consul_version": "1.2.2"
+  },
+  "builders": [{
+    "type": "googlecompute",
+    "image_name": "consul-server-{{isotime \"2006-01-02-030405\"}}",
+    "image_family": "consul",
+    "project_id": "{{user `project_id`}}",
+    "source_image_family": "ubuntu-1604-lts",
+    "zone": "{{user `zone`}}",
+    "ssh_username": "ubuntu"
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "{{template_dir}}/../../../terraform-google-consul",
+    "destination": "/tmp"
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo mkdir -p /opt/gruntwork",
+      "git clone https://github.com/gruntwork-io/bash-commons.git /tmp/bash-commons",
+      "sudo cp -r /tmp/bash-commons/modules/bash-commons/src /opt/gruntwork/bash-commons"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "/tmp/terraform-google-consul/modules/install-consul/install-consul --version {{user `consul_version`}}",
+      "/tmp/terraform-google-consul/modules/install-dnsmasq/install-dnsmasq"
+    ],
+    "pause_before": "30s"
+  }]
+}

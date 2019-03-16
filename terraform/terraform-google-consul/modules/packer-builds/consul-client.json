@@ -1,0 +1,45 @@
+{
+  "min_packer_version": "1.0.4",
+  "variables": {
+    "project_id": "stoffee-hashi-googs",
+    "zone": "us-west1-b",
+    "consul_version": "1.2.2"
+  },
+  "builders": [{
+    "type": "googlecompute",
+    "image_name": "consul-client-{{isotime \"2006-01-02-030405\"}}",
+    "image_family": "consul",
+    "project_id": "{{user `project_id`}}",
+    "source_image_family": "ubuntu-1604-lts",
+    "zone": "{{user `zone`}}",
+    "ssh_username": "ubuntu"
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "{{template_dir}}/../../../terraform-google-consul",
+    "destination": "/tmp"
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo mkdir -p /opt/gruntwork",
+      "git clone https://github.com/gruntwork-io/bash-commons.git /tmp/bash-commons",
+      "sudo cp -r /tmp/bash-commons/modules/bash-commons/src /opt/gruntwork/bash-commons"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "/tmp/terraform-google-consul/modules/install-consul/install-consul --version {{user `consul_version`}}",
+      "/tmp/terraform-google-consul/modules/install-dnsmasq/install-dnsmasq"
+    ]
+ },{
+    "type": "shell",
+    "inline": [
+      "sudo apt install -y golang-go",
+      "sudo mkdir -p /usr/local/src/image-service && sudo mkdir -p /usr/local/src/cat-service && sudo chmod 777 /usr/local/src/*-service",
+      "git clone https://github.com/anners/image-search.git /usr/local/src/image-service",
+      "cd /usr/local/src/image-service; sudo go build; sudo cp image-service /usr/local/bin/",
+      "git clone https://github.com/anners/cat-service.git /usr/local/src/cat-service",
+      "cd /usr/local/src/cat-service; sudo go build; sudo cp cat-service /usr/local/bin/"
+    ]
+  }]
+}
