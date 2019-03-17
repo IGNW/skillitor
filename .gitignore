@@ -23,9 +23,6 @@
 *rsa
 *.pub
 
-# Local .terraform directories
-**/.terraform/*
-
 # Crash log files
 crash.log
 
@@ -35,3 +32,8 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Python byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
