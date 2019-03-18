@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Simple script to send a single command to the parsing code
+# Pass in a quoted string on the command line to test the parsing code
 
 import sys
 from skillitor.core.queryparser import QueryParser
