@@ -14,19 +14,19 @@ class SkillitorQueryStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.SetSkill = channel.unary_unary(
-        '/SkillitorQuery/SetSkill',
+    self.SetSkills = channel.unary_unary(
+        '/SkillitorQuery/SetSkills',
         request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.SerializeToString,
         response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.Acknowledgement.FromString,
         )
-    self.UnsetSkill = channel.unary_unary(
-        '/SkillitorQuery/UnsetSkill',
+    self.UnsetSkills = channel.unary_unary(
+        '/SkillitorQuery/UnsetSkills',
         request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.SerializeToString,
         response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.Acknowledgement.FromString,
         )
-    self.FindSkill = channel.unary_stream(
-        '/SkillitorQuery/FindSkill',
-        request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillSpec.SerializeToString,
+    self.FindSkills = channel.unary_stream(
+        '/SkillitorQuery/FindSkills',
+        request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillList.SerializeToString,
         response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.FromString,
         )
 
@@ -35,21 +35,21 @@ class SkillitorQueryServicer(object):
   """This query service should be accepted by both the core and datastore(s)
   """
 
-  def SetSkill(self, request, context):
+  def SetSkills(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def UnsetSkill(self, request, context):
+  def UnsetSkills(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def FindSkill(self, request, context):
+  def FindSkills(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -59,19 +59,19 @@ class SkillitorQueryServicer(object):
 
 def add_SkillitorQueryServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'SetSkill': grpc.unary_unary_rpc_method_handler(
-          servicer.SetSkill,
+      'SetSkills': grpc.unary_unary_rpc_method_handler(
+          servicer.SetSkills,
           request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.FromString,
           response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.Acknowledgement.SerializeToString,
       ),
-      'UnsetSkill': grpc.unary_unary_rpc_method_handler(
-          servicer.UnsetSkill,
+      'UnsetSkills': grpc.unary_unary_rpc_method_handler(
+          servicer.UnsetSkills,
           request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.FromString,
           response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.Acknowledgement.SerializeToString,
       ),
-      'FindSkill': grpc.unary_stream_rpc_method_handler(
-          servicer.FindSkill,
-          request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillSpec.FromString,
+      'FindSkills': grpc.unary_stream_rpc_method_handler(
+          servicer.FindSkills,
+          request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillList.FromString,
           response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.SerializeToString,
       ),
   }

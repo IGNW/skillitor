@@ -7,18 +7,18 @@ from skillitor.core.api import skillitor_pb2, skillitor_pb2_grpc
 
 
 class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
-    def SetSkill(self, request, context):
-        print("Got a request to SetSkill. Request type: {}. "
+    def SetSkills(self, request, context):
+        print("Got a request to SetSkills. Request type: {}. "
               "String representation: {}".format(type(request), request))
         return skillitor_pb2.Acknowledgement(success=True)
 
-    def UnsetSkill(self, request, context):
-        print("Got a request to UnsetSkill. Request type: {}. "
+    def UnsetSkills(self, request, context):
+        print("Got a request to UnsetSkills. Request type: {}. "
               "String representation: {}".format(type(request), request))
         return skillitor_pb2.Acknowledgement(success=True)
 
-    def FindSkill(self, request, context):
-        print("Got a request to FindSkill. Request type: {}. "
+    def FindSkills(self, request, context):
+        print("Got a request to FindSkills. Request type: {}. "
               "String representation: {}".format(type(request), request))
         return skillitor_pb2.Acknowledgement(success=True)
 

@@ -17,14 +17,14 @@ kung_fu_is_strong = skillitor_pb2.SkillSpec(skill_name="Kung-fu", skill_level=sk
 golang_is_weak = skillitor_pb2.SkillSpec(skill_name="Golang", skill_level=skills.SkillLevel.BEGINNER)
 skills = [kung_fu_is_strong, golang_is_weak]
 sa = skillitor_pb2.SkillAssociation(user_id=user_id, skills=skills)
-response = stub.SetSkill(sa)
-print("Sent a SetSkill message, got response type: {}. "
+response = stub.SetSkills(sa)
+print("Sent a SetSkills message, got response type: {}. "
       "String representation: {}".format(type(response), response))
 
-response = stub.UnsetSkill(sa)
-print("Sent a UnsetSkill message, got response type: {}. "
+response = stub.UnsetSkills(sa)
+print("Sent a UnsetSkills message, got response type: {}. "
       "String representation: {}".format(type(response), response))
 
-response = stub.FindSkill(kung_fu_is_strong)
-print("Sent a FindSkill message, got response type: {}. "
+response = stub.FindSkills(kung_fu_is_strong)
+print("Sent a FindSkills message, got response type: {}. "
       "String representation: {}".format(type(response), response))
