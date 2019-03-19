@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+// This query service should be accepted by both the core and datastore(s)
+service SkillitorQuery {
+    rpc SetSkill (SkillAssociation) returns (Acknowledgement);
+    rpc UnsetSkill (SkillAssociation) returns (Acknowledgement);
+    rpc FindSkill (SkillSpec) returns (stream SkillAssociation);
+}
+
+message SkillAssociation {
+    string user_id = 1;
+    repeated SkillSpec skills = 2;
+}
+
+message SkillSpec {
+    enum SkillLevel {
+        UNDEFINED = 0;
+        BEGINNER = 1;
+        INTERMEDIATE = 2;
+        ADVANCED = 3;
+    }
+    string skill_name = 1;
+    SkillLevel skill_level = 2;
+}
+
+message Acknowledgement {
+    bool success = 1;
+    string error_msg = 2;
+}
+
+// We need a way to register services to the core.
+service SkillitorRegistrar {
+    rpc Register(Registration) returns (Acknowledgement);
+}
+
+message Registration {
+    enum ServiceType {
+        UNDEFINED = 0;
+        QUERY_AGENT = 1;
+        DATASTORE = 2;
+    }
+    ServiceType service_type = 1;
+    string service_name = 2;
+    string access_token = 3;
+    string address = 4;
+}
