@@ -4,7 +4,7 @@ syntax = "proto3";
 service SkillitorQuery {
     rpc SetSkills (SkillAssociation) returns (Acknowledgement);
     rpc UnsetSkills (SkillAssociation) returns (Acknowledgement);
-    rpc FindSkills (SkillList) returns (stream SkillAssociation);
+    rpc FindSkills (FindSpec) returns (stream SkillAssociation);
 }
 
 message SkillAssociation {
@@ -12,8 +12,9 @@ message SkillAssociation {
     repeated SkillSpec skills = 2;
 }
 
-message SkillList {
-    repeated SkillSpec skill_list = 1;
+message FindSpec {
+    string find_method = 1;
+    repeated SkillSpec skill_list = 2;
 }
 
 message SkillSpec {

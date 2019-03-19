@@ -26,7 +26,7 @@ class SkillitorQueryStub(object):
         )
     self.FindSkills = channel.unary_stream(
         '/SkillitorQuery/FindSkills',
-        request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillList.SerializeToString,
+        request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.FindSpec.SerializeToString,
         response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.FromString,
         )
 
@@ -71,7 +71,7 @@ def add_SkillitorQueryServicer_to_server(servicer, server):
       ),
       'FindSkills': grpc.unary_stream_rpc_method_handler(
           servicer.FindSkills,
-          request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillList.FromString,
+          request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.FindSpec.FromString,
           response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.SerializeToString,
       ),
   }

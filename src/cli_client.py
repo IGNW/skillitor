@@ -96,8 +96,9 @@ class CliClient(cmd.Cmd):
             print("ERROR: " + errmsg)
             return
 
-        skill_list = skillitor_pb2.SkillList(skill_list=skill_list)
-        response = self.rpc.FindSkills(skill_list)
+        find_spec = skillitor_pb2.FindSpec(find_method=find_method,
+                                           skill_list=skill_list)
+        response = self.rpc.FindSkills(find_spec)
         print("Sent a FindSkills({}) message, got response type: {}. "
               "String representation: {}".format(
             find_method, type(response), response))
