@@ -16,20 +16,21 @@
  *
  */
 
-const {EchoRequest,
-       ServerStreamingEchoRequest} = require('./skillitor_pb.js');
-const {EchoServiceClient} = require('./skillitor_grpc_web_pb.js');
+const {SkillSpec,
+       Acknowledgement,
+       SkillAssociation} = require('./skillitor_pb.js');
+const {SkillitorQueryClient} = require('./skillitor_grpc_web_pb.js');
 const {EchoApp} = require('../echoapp.js');
 const grpc = {};
 grpc.web = require('grpc-web');
 
-var echoService = new EchoServiceClient('http://'+window.location.hostname+':8080', null, null);
+var echoService = new SkillitorQueryClient('http://'+window.location.hostname+':8080', null, null);
 
 var echoApp = new EchoApp(
   echoService,
   {
-    EchoRequest: EchoRequest,
-    ServerStreamingEchoRequest: ServerStreamingEchoRequest
+    SkillAssociation: SkillAssociation,
+    Acknowledgement: Acknowledgement
   },
   {
     checkGrpcStatusCode: function(status) {

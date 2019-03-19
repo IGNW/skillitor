@@ -62,10 +62,10 @@ echoapp.EchoApp.addRightMessage = function(message) {
  */
 echoapp.EchoApp.prototype.echo = function(msg) {
   echoapp.EchoApp.addLeftMessage(msg);
-  var unaryRequest = new this.ctors.SkillSpec();
-  unaryRequest.setMessage(msg);
+  var unaryRequest = new this.ctors.SkillAssociation();
+  unaryRequest.toObject(msg);
   var self = this;
-  var call = this.echoService.echo(unaryRequest,
+  var call = this.echoService.setSkill(unaryRequest,
                                    {"custom-header-1": "value1"},
                                    function(err, response) {
     if (err) {
@@ -73,7 +73,7 @@ echoapp.EchoApp.prototype.echo = function(msg) {
                                       err.message+'"');
     } else {
       setTimeout(function () {
-        echoapp.EchoApp.addRightMessage(response.getMessage());
+        echoapp.EchoApp.addRightMessage(response.toObject());
       }, echoapp.EchoApp.INTERVAL);
     }
   });
@@ -86,20 +86,6 @@ echoapp.EchoApp.prototype.echo = function(msg) {
   });
 };
 
-/**
- * @param {string} msg
- */
-echoapp.EchoApp.prototype.echoError = function(msg) {
-  echoapp.EchoApp.addLeftMessage(msg);
-  var unaryRequest = new this.ctors.SkillSpec();
-  unaryRequest.setMessage(msg);
-  this.echoService.echoAbort(unaryRequest, {}, function(err, response) {
-    if (err) {
-      echoapp.EchoApp.addRightMessage('Error code: '+err.code+' "'+
-                                      err.message+'"');
-    }
-  });
-};
 
 /**
  * @param {string} msg
@@ -110,17 +96,15 @@ echoapp.EchoApp.prototype.repeatEcho = function(msg, count) {
   if (count > echoapp.EchoApp.MAX_STREAM_MESSAGES) {
     count = echoapp.EchoApp.MAX_STREAM_MESSAGES;
   }
-  var streamRequest = new this.ctors.ServerStreamingEchoRequest();
-  streamRequest.setMessage(msg);
-  streamRequest.setMessageCount(count);
-  streamRequest.setMessageInterval(echoapp.EchoApp.INTERVAL);
+  var streamRequest = new this.ctors.Acknolwedgement();
+  streamRequest.toObject(msg);
 
   var stream = this.echoService.serverStreamingEcho(
     streamRequest,
     {"custom-header-1": "value1"});
   var self = this;
   stream.on('data', function(response) {
-    echoapp.EchoApp.addRightMessage(response.getMessage());
+    echoapp.EchoApp.addRightMessage(response.toObject());
   });
   stream.on('status', function(status) {
     self.handlers.checkGrpcStatusCode(status);
