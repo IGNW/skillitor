@@ -62,7 +62,7 @@ echoapp.EchoApp.addRightMessage = function(message) {
  */
 echoapp.EchoApp.prototype.echo = function(msg) {
   echoapp.EchoApp.addLeftMessage(msg);
-  var unaryRequest = new this.ctors.EchoRequest();
+  var unaryRequest = new this.ctors.SkillSpec();
   unaryRequest.setMessage(msg);
   var self = this;
   var call = this.echoService.echo(unaryRequest,
@@ -91,7 +91,7 @@ echoapp.EchoApp.prototype.echo = function(msg) {
  */
 echoapp.EchoApp.prototype.echoError = function(msg) {
   echoapp.EchoApp.addLeftMessage(msg);
-  var unaryRequest = new this.ctors.EchoRequest();
+  var unaryRequest = new this.ctors.SkillSpec();
   unaryRequest.setMessage(msg);
   this.echoService.echoAbort(unaryRequest, {}, function(err, response) {
     if (err) {
