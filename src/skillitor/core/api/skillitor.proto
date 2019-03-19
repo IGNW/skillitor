@@ -2,14 +2,18 @@ syntax = "proto3";
 
 // This query service should be accepted by both the core and datastore(s)
 service SkillitorQuery {
-    rpc SetSkill (SkillAssociation) returns (Acknowledgement);
-    rpc UnsetSkill (SkillAssociation) returns (Acknowledgement);
-    rpc FindSkill (SkillSpec) returns (stream SkillAssociation);
+    rpc SetSkills (SkillAssociation) returns (Acknowledgement);
+    rpc UnsetSkills (SkillAssociation) returns (Acknowledgement);
+    rpc FindSkills (SkillList) returns (stream SkillAssociation);
 }
 
 message SkillAssociation {
     string user_id = 1;
     repeated SkillSpec skills = 2;
+}
+
+message SkillList {
+    repeated SkillSpec skill_list = 1;
 }
 
 message SkillSpec {

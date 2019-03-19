@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\"skillitor/core/api/skillitor.proto\"?\n\x10SkillAssociation\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x1a\n\x06skills\x18\x02 \x03(\x0b\x32\n.SkillSpec\"\x96\x01\n\tSkillSpec\x12\x12\n\nskill_name\x18\x01 \x01(\t\x12*\n\x0bskill_level\x18\x02 \x01(\x0e\x32\x15.SkillSpec.SkillLevel\"I\n\nSkillLevel\x12\r\n\tUNDEFINED\x10\x00\x12\x0c\n\x08\x42\x45GINNER\x10\x01\x12\x10\n\x0cINTERMEDIATE\x10\x02\x12\x0c\n\x08\x41\x44VANCED\x10\x03\"5\n\x0f\x41\x63knowledgement\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t\"\xba\x01\n\x0cRegistration\x12/\n\x0cservice_type\x18\x01 \x01(\x0e\x32\x19.Registration.ServiceType\x12\x14\n\x0cservice_name\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x03 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\"<\n\x0bServiceType\x12\r\n\tUNDEFINED\x10\x00\x12\x0f\n\x0bQUERY_AGENT\x10\x01\x12\r\n\tDATASTORE\x10\x02\x32\xa2\x01\n\x0eSkillitorQuery\x12/\n\x08SetSkill\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12\x31\n\nUnsetSkill\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12,\n\tFindSkill\x12\n.SkillSpec\x1a\x11.SkillAssociation0\x01\x32\x41\n\x12SkillitorRegistrar\x12+\n\x08Register\x12\r.Registration\x1a\x10.Acknowledgementb\x06proto3')
+  serialized_pb=_b('\n\"skillitor/core/api/skillitor.proto\"?\n\x10SkillAssociation\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x1a\n\x06skills\x18\x02 \x03(\x0b\x32\n.SkillSpec\"+\n\tSkillList\x12\x1e\n\nskill_list\x18\x01 \x03(\x0b\x32\n.SkillSpec\"\x96\x01\n\tSkillSpec\x12\x12\n\nskill_name\x18\x01 \x01(\t\x12*\n\x0bskill_level\x18\x02 \x01(\x0e\x32\x15.SkillSpec.SkillLevel\"I\n\nSkillLevel\x12\r\n\tUNDEFINED\x10\x00\x12\x0c\n\x08\x42\x45GINNER\x10\x01\x12\x10\n\x0cINTERMEDIATE\x10\x02\x12\x0c\n\x08\x41\x44VANCED\x10\x03\"5\n\x0f\x41\x63knowledgement\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t\"\xba\x01\n\x0cRegistration\x12/\n\x0cservice_type\x18\x01 \x01(\x0e\x32\x19.Registration.ServiceType\x12\x14\n\x0cservice_name\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x03 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\"<\n\x0bServiceType\x12\r\n\tUNDEFINED\x10\x00\x12\x0f\n\x0bQUERY_AGENT\x10\x01\x12\r\n\tDATASTORE\x10\x02\x32\xa5\x01\n\x0eSkillitorQuery\x12\x30\n\tSetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12\x32\n\x0bUnsetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12-\n\nFindSkills\x12\n.SkillList\x1a\x11.SkillAssociation0\x01\x32\x41\n\x12SkillitorRegistrar\x12+\n\x08Register\x12\r.Registration\x1a\x10.Acknowledgementb\x06proto3')
 )
 
 
@@ -49,8 +49,8 @@ _SKILLSPEC_SKILLLEVEL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=181,
-  serialized_end=254,
+  serialized_start=226,
+  serialized_end=299,
 )
 _sym_db.RegisterEnumDescriptor(_SKILLSPEC_SKILLLEVEL)
 
@@ -75,8 +75,8 @@ _REGISTRATION_SERVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=438,
-  serialized_end=498,
+  serialized_start=483,
+  serialized_end=543,
 )
 _sym_db.RegisterEnumDescriptor(_REGISTRATION_SERVICETYPE)
 
@@ -119,6 +119,37 @@ _SKILLASSOCIATION = _descriptor.Descriptor(
 )
 
 
+_SKILLLIST = _descriptor.Descriptor(
+  name='SkillList',
+  full_name='SkillList',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='skill_list', full_name='SkillList.skill_list', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=103,
+  serialized_end=146,
+)
+
+
 _SKILLSPEC = _descriptor.Descriptor(
   name='SkillSpec',
   full_name='SkillSpec',
@@ -153,8 +184,8 @@ _SKILLSPEC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=104,
-  serialized_end=254,
+  serialized_start=149,
+  serialized_end=299,
 )
 
 
@@ -191,8 +222,8 @@ _ACKNOWLEDGEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=256,
-  serialized_end=309,
+  serialized_start=301,
+  serialized_end=354,
 )
 
 
@@ -244,16 +275,18 @@ _REGISTRATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=312,
-  serialized_end=498,
+  serialized_start=357,
+  serialized_end=543,
 )
 
 _SKILLASSOCIATION.fields_by_name['skills'].message_type = _SKILLSPEC
+_SKILLLIST.fields_by_name['skill_list'].message_type = _SKILLSPEC
 _SKILLSPEC.fields_by_name['skill_level'].enum_type = _SKILLSPEC_SKILLLEVEL
 _SKILLSPEC_SKILLLEVEL.containing_type = _SKILLSPEC
 _REGISTRATION.fields_by_name['service_type'].enum_type = _REGISTRATION_SERVICETYPE
 _REGISTRATION_SERVICETYPE.containing_type = _REGISTRATION
 DESCRIPTOR.message_types_by_name['SkillAssociation'] = _SKILLASSOCIATION
+DESCRIPTOR.message_types_by_name['SkillList'] = _SKILLLIST
 DESCRIPTOR.message_types_by_name['SkillSpec'] = _SKILLSPEC
 DESCRIPTOR.message_types_by_name['Acknowledgement'] = _ACKNOWLEDGEMENT
 DESCRIPTOR.message_types_by_name['Registration'] = _REGISTRATION
@@ -265,6 +298,13 @@ SkillAssociation = _reflection.GeneratedProtocolMessageType('SkillAssociation', 
   # @@protoc_insertion_point(class_scope:SkillAssociation)
   ))
 _sym_db.RegisterMessage(SkillAssociation)
+
+SkillList = _reflection.GeneratedProtocolMessageType('SkillList', (_message.Message,), dict(
+  DESCRIPTOR = _SKILLLIST,
+  __module__ = 'skillitor.core.api.skillitor_pb2'
+  # @@protoc_insertion_point(class_scope:SkillList)
+  ))
+_sym_db.RegisterMessage(SkillList)
 
 SkillSpec = _reflection.GeneratedProtocolMessageType('SkillSpec', (_message.Message,), dict(
   DESCRIPTOR = _SKILLSPEC,
@@ -295,12 +335,12 @@ _SKILLITORQUERY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=501,
-  serialized_end=663,
+  serialized_start=546,
+  serialized_end=711,
   methods=[
   _descriptor.MethodDescriptor(
-    name='SetSkill',
-    full_name='SkillitorQuery.SetSkill',
+    name='SetSkills',
+    full_name='SkillitorQuery.SetSkills',
     index=0,
     containing_service=None,
     input_type=_SKILLASSOCIATION,
@@ -308,8 +348,8 @@ _SKILLITORQUERY = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='UnsetSkill',
-    full_name='SkillitorQuery.UnsetSkill',
+    name='UnsetSkills',
+    full_name='SkillitorQuery.UnsetSkills',
     index=1,
     containing_service=None,
     input_type=_SKILLASSOCIATION,
@@ -317,11 +357,11 @@ _SKILLITORQUERY = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='FindSkill',
-    full_name='SkillitorQuery.FindSkill',
+    name='FindSkills',
+    full_name='SkillitorQuery.FindSkills',
     index=2,
     containing_service=None,
-    input_type=_SKILLSPEC,
+    input_type=_SKILLLIST,
     output_type=_SKILLASSOCIATION,
     serialized_options=None,
   ),
@@ -337,8 +377,8 @@ _SKILLITORREGISTRAR = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=665,
-  serialized_end=730,
+  serialized_start=713,
+  serialized_end=778,
   methods=[
   _descriptor.MethodDescriptor(
     name='Register',
