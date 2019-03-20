@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\"skillitor/core/api/skillitor.proto\"?\n\x10SkillAssociation\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x1a\n\x06skills\x18\x02 \x03(\x0b\x32\n.SkillSpec\"?\n\x08\x46indSpec\x12\x13\n\x0b\x66ind_method\x18\x01 \x01(\t\x12\x1e\n\nskill_list\x18\x02 \x03(\x0b\x32\n.SkillSpec\"\x96\x01\n\tSkillSpec\x12\x12\n\nskill_name\x18\x01 \x01(\t\x12*\n\x0bskill_level\x18\x02 \x01(\x0e\x32\x15.SkillSpec.SkillLevel\"I\n\nSkillLevel\x12\r\n\tUNDEFINED\x10\x00\x12\x0c\n\x08\x42\x45GINNER\x10\x01\x12\x10\n\x0cINTERMEDIATE\x10\x02\x12\x0c\n\x08\x41\x44VANCED\x10\x03\"5\n\x0f\x41\x63knowledgement\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t\"\xba\x01\n\x0cRegistration\x12/\n\x0cservice_type\x18\x01 \x01(\x0e\x32\x19.Registration.ServiceType\x12\x14\n\x0cservice_name\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x03 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\"<\n\x0bServiceType\x12\r\n\tUNDEFINED\x10\x00\x12\x0f\n\x0bQUERY_AGENT\x10\x01\x12\r\n\tDATASTORE\x10\x02\x32\xa4\x01\n\x0eSkillitorQuery\x12\x30\n\tSetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12\x32\n\x0bUnsetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12,\n\nFindSkills\x12\t.FindSpec\x1a\x11.SkillAssociation0\x01\x32\x41\n\x12SkillitorRegistrar\x12+\n\x08Register\x12\r.Registration\x1a\x10.Acknowledgementb\x06proto3')
+  serialized_pb=_b('\n\"skillitor/core/api/skillitor.proto\"L\n\nRawMessage\x12\x14\n\x0c\x63ommand_name\x18\x01 \x01(\t\x12\x14\n\x0c\x63ommand_text\x18\x02 \x01(\t\x12\x12\n\nuser_email\x18\x03 \x01(\t\"\x1b\n\x0bRawResponse\x12\x0c\n\x04text\x18\x01 \x01(\t\"B\n\x10SkillAssociation\x12\x12\n\nuser_email\x18\x01 \x01(\t\x12\x1a\n\x06skills\x18\x02 \x03(\x0b\x32\n.SkillSpec\"?\n\x08\x46indSpec\x12\x13\n\x0b\x66ind_method\x18\x01 \x01(\t\x12\x1e\n\nskill_list\x18\x02 \x03(\x0b\x32\n.SkillSpec\"\x96\x01\n\tSkillSpec\x12\x12\n\nskill_name\x18\x01 \x01(\t\x12*\n\x0bskill_level\x18\x02 \x01(\x0e\x32\x15.SkillSpec.SkillLevel\"I\n\nSkillLevel\x12\r\n\tUNDEFINED\x10\x00\x12\x0c\n\x08\x42\x45GINNER\x10\x01\x12\x10\n\x0cINTERMEDIATE\x10\x02\x12\x0c\n\x08\x41\x44VANCED\x10\x03\"5\n\x0f\x41\x63knowledgement\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t\"\xba\x01\n\x0cRegistration\x12/\n\x0cservice_type\x18\x01 \x01(\x0e\x32\x19.Registration.ServiceType\x12\x14\n\x0cservice_name\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x03 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\"<\n\x0bServiceType\x12\r\n\tUNDEFINED\x10\x00\x12\x0f\n\x0bQUERY_AGENT\x10\x01\x12\r\n\tDATASTORE\x10\x02\x32\xcd\x01\n\x0eSkillitorQuery\x12\x30\n\tSetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12\x32\n\x0bUnsetSkills\x12\x11.SkillAssociation\x1a\x10.Acknowledgement\x12,\n\nFindSkills\x12\t.FindSpec\x1a\x11.SkillAssociation0\x01\x12\'\n\nRawCommand\x12\x0b.RawMessage\x1a\x0c.RawResponse2A\n\x12SkillitorRegistrar\x12+\n\x08Register\x12\r.Registration\x1a\x10.Acknowledgementb\x06proto3')
 )
 
 
@@ -49,8 +49,8 @@ _SKILLSPEC_SKILLLEVEL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=246,
-  serialized_end=319,
+  serialized_start=356,
+  serialized_end=429,
 )
 _sym_db.RegisterEnumDescriptor(_SKILLSPEC_SKILLLEVEL)
 
@@ -75,10 +75,86 @@ _REGISTRATION_SERVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=503,
-  serialized_end=563,
+  serialized_start=613,
+  serialized_end=673,
 )
 _sym_db.RegisterEnumDescriptor(_REGISTRATION_SERVICETYPE)
+
+
+_RAWMESSAGE = _descriptor.Descriptor(
+  name='RawMessage',
+  full_name='RawMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='command_name', full_name='RawMessage.command_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='command_text', full_name='RawMessage.command_text', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_email', full_name='RawMessage.user_email', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=38,
+  serialized_end=114,
+)
+
+
+_RAWRESPONSE = _descriptor.Descriptor(
+  name='RawResponse',
+  full_name='RawResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='text', full_name='RawResponse.text', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=116,
+  serialized_end=143,
+)
 
 
 _SKILLASSOCIATION = _descriptor.Descriptor(
@@ -89,7 +165,7 @@ _SKILLASSOCIATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='SkillAssociation.user_id', index=0,
+      name='user_email', full_name='SkillAssociation.user_email', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -114,8 +190,8 @@ _SKILLASSOCIATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=38,
-  serialized_end=101,
+  serialized_start=145,
+  serialized_end=211,
 )
 
 
@@ -152,8 +228,8 @@ _FINDSPEC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=103,
-  serialized_end=166,
+  serialized_start=213,
+  serialized_end=276,
 )
 
 
@@ -191,8 +267,8 @@ _SKILLSPEC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=169,
-  serialized_end=319,
+  serialized_start=279,
+  serialized_end=429,
 )
 
 
@@ -229,8 +305,8 @@ _ACKNOWLEDGEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=321,
-  serialized_end=374,
+  serialized_start=431,
+  serialized_end=484,
 )
 
 
@@ -282,8 +358,8 @@ _REGISTRATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=377,
-  serialized_end=563,
+  serialized_start=487,
+  serialized_end=673,
 )
 
 _SKILLASSOCIATION.fields_by_name['skills'].message_type = _SKILLSPEC
@@ -292,12 +368,28 @@ _SKILLSPEC.fields_by_name['skill_level'].enum_type = _SKILLSPEC_SKILLLEVEL
 _SKILLSPEC_SKILLLEVEL.containing_type = _SKILLSPEC
 _REGISTRATION.fields_by_name['service_type'].enum_type = _REGISTRATION_SERVICETYPE
 _REGISTRATION_SERVICETYPE.containing_type = _REGISTRATION
+DESCRIPTOR.message_types_by_name['RawMessage'] = _RAWMESSAGE
+DESCRIPTOR.message_types_by_name['RawResponse'] = _RAWRESPONSE
 DESCRIPTOR.message_types_by_name['SkillAssociation'] = _SKILLASSOCIATION
 DESCRIPTOR.message_types_by_name['FindSpec'] = _FINDSPEC
 DESCRIPTOR.message_types_by_name['SkillSpec'] = _SKILLSPEC
 DESCRIPTOR.message_types_by_name['Acknowledgement'] = _ACKNOWLEDGEMENT
 DESCRIPTOR.message_types_by_name['Registration'] = _REGISTRATION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+RawMessage = _reflection.GeneratedProtocolMessageType('RawMessage', (_message.Message,), dict(
+  DESCRIPTOR = _RAWMESSAGE,
+  __module__ = 'skillitor.core.api.skillitor_pb2'
+  # @@protoc_insertion_point(class_scope:RawMessage)
+  ))
+_sym_db.RegisterMessage(RawMessage)
+
+RawResponse = _reflection.GeneratedProtocolMessageType('RawResponse', (_message.Message,), dict(
+  DESCRIPTOR = _RAWRESPONSE,
+  __module__ = 'skillitor.core.api.skillitor_pb2'
+  # @@protoc_insertion_point(class_scope:RawResponse)
+  ))
+_sym_db.RegisterMessage(RawResponse)
 
 SkillAssociation = _reflection.GeneratedProtocolMessageType('SkillAssociation', (_message.Message,), dict(
   DESCRIPTOR = _SKILLASSOCIATION,
@@ -342,8 +434,8 @@ _SKILLITORQUERY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=566,
-  serialized_end=730,
+  serialized_start=676,
+  serialized_end=881,
   methods=[
   _descriptor.MethodDescriptor(
     name='SetSkills',
@@ -372,6 +464,15 @@ _SKILLITORQUERY = _descriptor.ServiceDescriptor(
     output_type=_SKILLASSOCIATION,
     serialized_options=None,
   ),
+  _descriptor.MethodDescriptor(
+    name='RawCommand',
+    full_name='SkillitorQuery.RawCommand',
+    index=3,
+    containing_service=None,
+    input_type=_RAWMESSAGE,
+    output_type=_RAWRESPONSE,
+    serialized_options=None,
+  ),
 ])
 _sym_db.RegisterServiceDescriptor(_SKILLITORQUERY)
 
@@ -384,8 +485,8 @@ _SKILLITORREGISTRAR = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=732,
-  serialized_end=797,
+  serialized_start=883,
+  serialized_end=948,
   methods=[
   _descriptor.MethodDescriptor(
     name='Register',

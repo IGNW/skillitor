@@ -19,7 +19,7 @@ message RawResponse {
 }
 
 message SkillAssociation {
-    string user_id = 1;
+    string user_email = 1;
     repeated SkillSpec skills = 2;
 }
 

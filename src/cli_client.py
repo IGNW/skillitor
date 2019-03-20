@@ -67,7 +67,7 @@ class CliClient(cmd.Cmd):
             print("ERROR: " + errmsg)
             return
 
-        sa = skillitor_pb2.SkillAssociation(user_id=email, skills=skill_list)
+        sa = skillitor_pb2.SkillAssociation(user_email=email, skills=skill_list)
         if unset:
             response = self.rpc.UnsetSkills(sa)
             action = 'UnsetSkills'

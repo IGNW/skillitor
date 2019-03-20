@@ -29,6 +29,11 @@ class SkillitorQueryStub(object):
         request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.FindSpec.SerializeToString,
         response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.FromString,
         )
+    self.RawCommand = channel.unary_unary(
+        '/SkillitorQuery/RawCommand',
+        request_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.RawMessage.SerializeToString,
+        response_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.RawResponse.FromString,
+        )
 
 
 class SkillitorQueryServicer(object):
@@ -56,6 +61,13 @@ class SkillitorQueryServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def RawCommand(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_SkillitorQueryServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -73,6 +85,11 @@ def add_SkillitorQueryServicer_to_server(servicer, server):
           servicer.FindSkills,
           request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.FindSpec.FromString,
           response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.SkillAssociation.SerializeToString,
+      ),
+      'RawCommand': grpc.unary_unary_rpc_method_handler(
+          servicer.RawCommand,
+          request_deserializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.RawMessage.FromString,
+          response_serializer=skillitor_dot_core_dot_api_dot_skillitor__pb2.RawResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
