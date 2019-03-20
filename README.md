@@ -1,8 +1,6 @@
 ![logo](skillitor-github.png)
 
 
-Modular skill-tracking microservice
-
 ## Intra-service Communication
 
 
