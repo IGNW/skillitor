@@ -58,7 +58,8 @@ class CommandInterpreter:
         if match:
             skill_string, email = match.groups()
             skill_list = self._parse_skill_string(skill_string)
-            print("DEBUG: Got email ({}) and skills ({})".format(email, skill_list))
+            simple_skill_list = [(s.skill_name, s.skill_level) for s in skill_list]
+            print("DEBUG: Got email ({}) and skills ({})".format(email, simple_skill_list))
         else:
             errmsg = self._PARSE_ERROR
         return errmsg, email, skill_list
