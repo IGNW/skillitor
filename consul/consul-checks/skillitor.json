@@ -1,0 +1,7 @@
+"check": {
+    "id": "skillitor-db-service",
+    "name": "Skillitor DB Service",
+    "tcp": "localhost:50051",
+    "interval": "10s",
+    "timeout": "1s"
+}

@@ -1,0 +1,7 @@
+"check": {
+    "id": "skillitor-core-service",
+    "name": "Skillitor Core Service",
+    "grpc": "127.0.0.1:50051",
+    "grpc_use_tls": true,
+    "interval": "10s"
+}
