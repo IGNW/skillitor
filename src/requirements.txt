@@ -1,3 +1,4 @@
-pony
+dataset
+psycopg2-binary
 grpcio
 grpcio-tools
