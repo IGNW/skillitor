@@ -62,10 +62,10 @@ echoapp.EchoApp.addRightMessage = function(message) {
  */
 echoapp.EchoApp.prototype.echo = function(msg) {
   echoapp.EchoApp.addLeftMessage(msg);
-  var unaryRequest = new this.ctors.SkillAssociation();
-  unaryRequest.toObject(msg);
+  var unaryRequest = new this.ctors.RawMessage();
+  unaryRequest.toString(msg);
   var self = this;
-  var call = this.echoService.setSkills(unaryRequest,
+  var call = this.echoService.rawCommand(unaryRequest,
                                    {"custom-header-1": "value1"},
                                    function(err, response) {
     if (err) {
@@ -96,7 +96,7 @@ echoapp.EchoApp.prototype.repeatEcho = function(msg, count) {
   if (count > echoapp.EchoApp.MAX_STREAM_MESSAGES) {
     count = echoapp.EchoApp.MAX_STREAM_MESSAGES;
   }
-  var streamRequest = new this.ctors.Acknolwedgement();
+  var streamRequest = new this.ctors.RawMessage();
   streamRequest.toString(msg);
 
   var stream = this.echoService.serverStreamingEcho(
