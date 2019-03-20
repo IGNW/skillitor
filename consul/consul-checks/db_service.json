@@ -1,0 +1,7 @@
+"check": {
+    "id": "skillitor-db-service",
+    "name": "Skillitor DB Service",
+    "grpc": "127.0.0.1:50051",
+    "grpc_use_tls": true,
+    "interval": "10s"
+}
