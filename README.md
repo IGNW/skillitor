@@ -1,4 +1,4 @@
-![logo](skillitor_250x250.png)
+![logo](skillitor-github.png)
 
 # Skillitor
 Modular skill-tracking microservice
