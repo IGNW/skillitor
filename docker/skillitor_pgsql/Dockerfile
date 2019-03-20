@@ -22,7 +22,7 @@ RUN pip install -U pip && \
     pip install -r /wheels/requirements.txt -f /wheels && \
     rm -rf /wheels && \
     rm -rf /root/.cache/pip/* && \
-    apk add --no-cache libstdc++
+    apk add --no-cache libstdc++ libpq
 COPY src /app
 WORKDIR /app
 RUN /app/grpc_generate.sh
