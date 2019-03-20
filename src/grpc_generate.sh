@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # Generates files in skillitor/api/
 # Assumes that the grpcio-tools pip package is istalled
 
