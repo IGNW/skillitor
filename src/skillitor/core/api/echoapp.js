@@ -65,7 +65,7 @@ echoapp.EchoApp.prototype.echo = function(msg) {
   var unaryRequest = new this.ctors.SkillAssociation();
   unaryRequest.toObject(msg);
   var self = this;
-  var call = this.echoService.setSkill(unaryRequest,
+  var call = this.echoService.setSkills(unaryRequest,
                                    {"custom-header-1": "value1"},
                                    function(err, response) {
     if (err) {
@@ -73,7 +73,7 @@ echoapp.EchoApp.prototype.echo = function(msg) {
                                       err.message+'"');
     } else {
       setTimeout(function () {
-        echoapp.EchoApp.addRightMessage(response.toObject());
+        echoapp.EchoApp.addRightMessage(response.toString());
       }, echoapp.EchoApp.INTERVAL);
     }
   });
@@ -97,14 +97,14 @@ echoapp.EchoApp.prototype.repeatEcho = function(msg, count) {
     count = echoapp.EchoApp.MAX_STREAM_MESSAGES;
   }
   var streamRequest = new this.ctors.Acknolwedgement();
-  streamRequest.toObject(msg);
+  streamRequest.toString(msg);
 
   var stream = this.echoService.serverStreamingEcho(
     streamRequest,
     {"custom-header-1": "value1"});
   var self = this;
   stream.on('data', function(response) {
-    echoapp.EchoApp.addRightMessage(response.toObject());
+    echoapp.EchoApp.addRightMessage(response.toString());
   });
   stream.on('status', function(status) {
     self.handlers.checkGrpcStatusCode(status);

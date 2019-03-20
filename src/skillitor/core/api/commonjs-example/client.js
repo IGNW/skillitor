@@ -24,7 +24,7 @@ const {EchoApp} = require('../echoapp.js');
 const grpc = {};
 grpc.web = require('grpc-web');
 
-var echoService = new SkillitorQueryClient('http://'+window.location.hostname+':8080', null, null);
+var echoService = new SkillitorQueryClient('http://'+window.location.hostname+':50051', null, null);
 
 var echoApp = new EchoApp(
   echoService,
