@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-from pprint import pprint, pformat
 import re
-from typing import List, Tuple, Optional
+from typing import List
 
 from .skills import SkillLevel
 from skillitor.core.api import skillitor_pb2, skillitor_pb2_grpc
@@ -44,11 +43,16 @@ class CommandInterpreter:
         \ *$                     # Ensure that we've matched everything to EOL
     """.format(**_patterns), re.VERBOSE)
 
-    def process_set_cmd(self, query_text: str) -> Tuple[str, Optional[str], List[skillitor_pb2.SkillSpec]]:
+    def process_set_cmd(self, current_user: str,
+                        rpc_handle: skillitor_pb2_grpc.SkillitorQueryStub,
+                        query_text: str, unset=False):
         """Parse set/unset command arguments
 
         Args:
-            query_text: FIXME - add description
+            current_user: FIXME
+            rpc_handle: FIXME
+            query_text: FIXME
+            unset: FIXME
 
         """
         errmsg = ''
@@ -62,9 +66,29 @@ class CommandInterpreter:
             print("DEBUG: Got email ({}) and skills ({})".format(email, simple_skill_list))
         else:
             errmsg = self._PARSE_ERROR
+        email = email or current_user  # Use current user as a default
+        if errmsg:
+            print("ERROR: " + errmsg)
+            return
+
+        sa = skillitor_pb2.SkillAssociation(user_email=email, skills=skill_list)
+        if unset:
+            response = rpc_handle.UnsetSkills(sa)
+            action = 'UnsetSkills'
+        else:
+            response = rpc_handle.SetSkills(sa)
+            action = 'SetSkills'
+
+        print("Sent a {} message, got response type: {}. "
+              "String representation: {}".format(
+            action, type(response), response))
+        if not response.success:
+            print("Error message was: " + response.error_msg)
+
         return errmsg, email, skill_list
 
-    def process_find_cmd(self, query_text: str) -> Tuple[str, str, List[skillitor_pb2.SkillSpec]]:
+    def process_find_cmd(self, rpc_handle: skillitor_pb2_grpc.SkillitorQueryStub,
+                         query_text: str):
         """Parse set/unset command arguments
 
         Args:
@@ -81,7 +105,16 @@ class CommandInterpreter:
         else:
             errmsg = self._PARSE_ERROR
 
-        return errmsg, find_method, skill_list
+        if errmsg:
+            print("ERROR: " + errmsg)
+            return
+
+        find_spec = skillitor_pb2.FindSpec(find_method=find_method,
+                                           skill_list=skill_list)
+        for sa in rpc_handle.FindSkills(find_spec):
+            simple_skill_list = [(s.skill_name, s.skill_level) for s in sa.skills]
+            print("Found user {} with skills {}".format(
+                sa.user_email, simple_skill_list))
 
     def _parse_skill_string(self, skill_string) -> List[skillitor_pb2.SkillSpec]:
         """Split up a string with skills into (skill, level) tuples"""

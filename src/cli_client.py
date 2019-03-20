@@ -18,7 +18,7 @@ class CliClient(cmd.Cmd):
             'port': '',
             'user': '',
         }
-        self.rpc = None
+        self.rpc_handle = None
         self.current_user = None
 
     def _update_prompt(self):
@@ -42,18 +42,18 @@ class CliClient(cmd.Cmd):
         self.server = {'hostname': hostname, 'port': port, 'user': email}
         self._update_prompt()
         channel = grpc.insecure_channel('{hostname}:{port}'.format(**self.server))
-        self.rpc = skillitor_pb2_grpc.SkillitorQueryStub(channel)
+        self.rpc_handle = skillitor_pb2_grpc.SkillitorQueryStub(channel)
 
     def do_disconnect(self, line):
         self.server = {'hostname': '', 'port': '', 'user': ''}  # Server settings
-        self.rpc = None
+        self.rpc_handle = None
         self._update_prompt()
 
     def do_quit(self, _):
         return True
 
     def do_skillset(self, line, unset=False):
-        if self.rpc is None:
+        if self.rpc_handle is None:
             print("You must run 'connect' first to specify server settings")
             return
 
@@ -61,31 +61,13 @@ class CliClient(cmd.Cmd):
             print("Usage: skillset <skill_list> [for <email>]")
             return
 
-        errmsg, email, skill_list = self.qp.process_set_cmd(line)
-        email = email or self.server['user']  # Use current user as a default
-        if errmsg:
-            print("ERROR: " + errmsg)
-            return
-
-        sa = skillitor_pb2.SkillAssociation(user_email=email, skills=skill_list)
-        if unset:
-            response = self.rpc.UnsetSkills(sa)
-            action = 'UnsetSkills'
-        else:
-            response = self.rpc.SetSkills(sa)
-            action = 'SetSkills'
-
-        print("Sent a {} message, got response type: {}. "
-              "String representation: {}".format(
-            action, type(response), response))
-        if not response.success:
-            print("Error message was: " + response.error_msg)
+        self.qp.process_set_cmd(self.server['user'], self.rpc_handle, line, unset)
 
     def do_skillunset(self, line):
         self.do_skillset(line, unset=True)
 
     def do_skillfind(self, line):
-        if self.rpc is None:
+        if self.rpc_handle is None:
             print("You must run 'connect' first to specify server settings")
             return
 
@@ -93,15 +75,7 @@ class CliClient(cmd.Cmd):
             print("Usage: skillfind any|all <skill_list>")
             return
 
-        errmsg, find_method, skill_list = self.qp.process_find_cmd(line)
-        if errmsg:
-            print("ERROR: " + errmsg)
-            return
-
-        find_spec = skillitor_pb2.FindSpec(find_method=find_method,
-                                           skill_list=skill_list)
-        for skill_association in self.rpc.FindSkills(find_spec):
-            print("Found user with that skill: " + skill_association.user_email)
+        self.qp.process_find_cmd(self.rpc_handle, line)
 
 
 if __name__ == '__main__':

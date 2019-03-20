@@ -18,6 +18,7 @@ class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
         channel = grpc.insecure_channel('{hostname}:{port}'.format(
             **self.db_service_config))
         self.db_service = skillitor_pb2_grpc.SkillitorQueryStub(channel)
+        self.qp = CommandInterpreter()
 
     def SetSkills(self, request, context):
         print("Received a call to SetSkills: " + str(request))
@@ -33,7 +34,23 @@ class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
 
     def RawCommand(self, request, context):
         print("Received a call to RawCommand: " + str(request))
-        return skillitor_pb2.RawResponse(text="Real response will go here.")
+        command, args = request.command_text.split(' ', 2)
+        response = "Real response will go here."
+        if command == 'skillset':
+            self.qp.process_set_cmd('web-user@example.com', self.db_service,
+                                    args)
+        elif command == 'skillunset':
+            self.qp.process_set_cmd('web-user@example.com', self.db_service,
+                                    args, unset=True)
+        elif command == 'skillfind':
+            self.qp.process_find_cmd(self.db_service, args)
+        else:
+            response = (
+                "Usage:\n"
+                "skillset|skillunset <skill_list> [for <email>]\n"
+                "skillfind any|all <skill_list>\n")
+
+        return skillitor_pb2.RawResponse(text=response)
 
 
 def serve():
