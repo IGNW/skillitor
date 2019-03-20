@@ -16,21 +16,20 @@
  *
  */
 
-const {SkillSpec,
-       Acknowledgement,
-       SkillAssociation} = require('./skillitor_pb.js');
+const {RawMessage,
+       RawResponse} = require('./skillitor_pb.js');
 const {SkillitorQueryClient} = require('./skillitor_grpc_web_pb.js');
 const {EchoApp} = require('../echoapp.js');
 const grpc = {};
 grpc.web = require('grpc-web');
 
-var echoService = new SkillitorQueryClient('http://'+window.location.hostname+':50051', null, null);
+var echoService = new SkillitorQueryClient('http://'+window.location.hostname+':8080', null, null);
 
 var echoApp = new EchoApp(
   echoService,
   {
-    SkillAssociation: SkillAssociation,
-    Acknowledgement: Acknowledgement
+    RawMessage: RawMessage,
+    RawResponse: RawResponse
   },
   {
     checkGrpcStatusCode: function(status) {
