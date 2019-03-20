@@ -22,6 +22,11 @@ class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
               "String representation: {}".format(type(request), request))
         return skillitor_pb2.Acknowledgement(success=True)
 
+    def RawCommand(self, request, context):
+        print("Got a request to RawCommand. Request type: {}. "
+              "String representation: {}".format(type(request), request))
+        return skillitor_pb2.RawResponse(text="Real response will go here.")
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
