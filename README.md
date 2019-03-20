@@ -19,6 +19,13 @@ Keep track of people, their skills, and an optional skill experience level.
 Accept a message from an agent to set a skill/level for a person.
 Accept a message from an agent requesting to search for all people having one or more skills and returning the result.
 
+Skill levels
+
+Beginner: A novice understanding of the skill. You have exposure to the skill and understand its basic concepts but lack experience. 
+Intermediate: Between a beginner and an expert. You have experience with and can carry out the skill but don't understand its advanced concepts. 
+Advanced: A highly developed skill level. You have solid experience and training with the skill and understand advanced concepts. You demonstrate proficiency and superior skill level.
+
+
 ###Prequisites
 A Slack accoujnt
 
