@@ -78,6 +78,8 @@ class CliClient(cmd.Cmd):
         print("Sent a {} message, got response type: {}. "
               "String representation: {}".format(
             action, type(response), response))
+        if not response.success:
+            print("Error message was: " + response.error_msg)
 
     def do_skillunset(self, line):
         self.do_skillset(line, unset=True)
@@ -98,10 +100,8 @@ class CliClient(cmd.Cmd):
 
         find_spec = skillitor_pb2.FindSpec(find_method=find_method,
                                            skill_list=skill_list)
-        response = self.rpc.FindSkills(find_spec)
-        print("Sent a FindSkills({}) message, got response type: {}. "
-              "String representation: {}".format(
-            find_method, type(response), response))
+        for skill_association in self.rpc.FindSkills(find_spec):
+            print("Found user with that skill: " + skill_association.user_email)
 
 
 if __name__ == '__main__':
