@@ -33,9 +33,9 @@ class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
         print("Received a call to SetSkills")
         try:
             user_table = self.db['user']
-            user_table.upsert(dict(email=str(request.user_email)), ['email'])
+            user_table.upsert(dict(email=str(request.user_email).lower()), ['email'])
             # Get the user that we just inserted or updated
-            user = user_table.find_one(email=request.user_email)
+            user = user_table.find_one(email=request.user_email.lower())
 
             skill_associations = self.db['skill_associations']
             for skill in request.skills:
@@ -53,13 +53,13 @@ class SkillitorQueryHandler(skillitor_pb2_grpc.SkillitorQueryServicer):
         print("Received a call to UnsetSkills")
         try:
             user_table = self.db['user']
-            user_table.find_one(email=str(request.user_email))
+            user_table.find_one(email=str(request.user_email).lower())
             # Get the user that we just inserted or updated
-            user = user_table.find_one(email=request.user_email)
+            user = user_table.find_one(email=request.user_email.lower())
             if user is None:
-                print('Not removing skills for non-existing user ' + request.user_email)
+                print('Not removing skills for non-existing user ' + request.user_email.lower())
             else:
-                print("Found user ID {} for {}".format(user['id'], request.user_email))
+                print("Found user ID {} for {}".format(user['id'], request.user_email.lower()))
 
                 skill_associations = self.db['skill_associations']
                 skills_to_remove = tuple(skill.skill_name.lower() for skill in request.skills)
