@@ -1,0 +1,34 @@
+# Compose file to test the services in docker. Make sure to set a DB_PASSWORD
+# environment variable before running `docker-compose up`
+
+version: '3'
+services:
+  pgsql_db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=skillator
+    links:
+      - skillitor_pgsql
+  skillitor_pgsql:
+    build:
+      context: ..
+      dockerfile: docker/skillitor_pgsql/Dockerfile
+    image: skillitor_pgsql
+    environment:
+      - DB_HOSTNAME=pgsql_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=5432
+      - DB_NAME=skillator
+    links:
+      - skillitor_core
+  skillitor_core:
+    build:
+      context: ..
+      dockerfile: docker/skillitor_core/Dockerfile
+    image: skillitor_core
+    ports:
+      - 50051:50051
+    environment:
+      - DB_SERVICE_HOSTNAME=skillitor_pgsql
