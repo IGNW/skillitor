@@ -5,6 +5,17 @@ service SkillitorQuery {
     rpc SetSkills (SkillAssociation) returns (Acknowledgement);
     rpc UnsetSkills (SkillAssociation) returns (Acknowledgement);
     rpc FindSkills (FindSpec) returns (stream SkillAssociation);
+    rpc RawCommand (RawMessage) returns (RawResponse);
+}
+
+message RawMessage {
+    string command_name = 1;
+    string command_text = 2;
+    string user_email = 3;
+}
+
+message RawResponse {
+    string text = 1;
 }
 
 message SkillAssociation {
