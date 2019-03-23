@@ -1,4 +1,4 @@
-![logo](skillitor-github.png)
+![logo](images/skillitor-github.png)
 
 
 ## Intra-service Communication
@@ -10,7 +10,7 @@ To communicate with Slack, you can define slash commands and then specify a HTTP
 
 Consul provides service discovery, and secure communication between services.
 
-![diagram](hackathon.png)
+![diagram](images/architecture.png)
 
 ### Features & Functionality
 Keep track of people, their skills, and an optional skill experience level.
