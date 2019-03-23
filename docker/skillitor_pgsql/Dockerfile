@@ -2,7 +2,6 @@ ARG PYTHON_VERSION=3.7.2-alpine
 FROM python:${PYTHON_VERSION} as builder
 RUN apk add --update --no-cache \
     gcc \
-    libstdc++ \
     linux-headers \
     make \
     musl-dev \
@@ -10,7 +9,7 @@ RUN apk add --update --no-cache \
     python-dev \
     g++
 WORKDIR /wheels
-COPY src/requirements.txt /wheels/requirements.txt
+COPY docker/skillitor_pgsql/requirements.txt /wheels/requirements.txt
 RUN pip install -U pip && \
     pip wheel --requirement requirements.txt
 
@@ -26,6 +25,6 @@ RUN pip install -U pip && \
     apk add --no-cache libstdc++ libpq
 COPY src /app
 WORKDIR /app
-RUN /app/grpc_generate.sh
+RUN ./grpc_generate.sh
 EXPOSE 50051
 CMD ["python3", "/app/postgres_db_service.py"]
