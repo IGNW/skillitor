@@ -17,6 +17,7 @@ RUN pip install -U pip && \
 FROM python:${PYTHON_VERSION}
 ENV PYTHONPATH /app
 ENV APP_HOME /app
+ENV PYTHONUNBUFFERED 1
 COPY --from=builder /wheels /wheels
 RUN pip install -U pip && \
     pip install -r /wheels/requirements.txt -f /wheels && \
